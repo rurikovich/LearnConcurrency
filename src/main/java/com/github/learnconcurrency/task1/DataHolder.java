@@ -15,7 +15,7 @@ public class DataHolder {
 
     private Queue<String> data = new LinkedList<>();
 
-    public synchronized void addData(String s, int producerNumber) {
+    public  void addData(String s, int producerNumber) {
         while (isFull()) {
             System.out.println(format("addData. waiting. size =%s", data.size()));
             waitWithException();
