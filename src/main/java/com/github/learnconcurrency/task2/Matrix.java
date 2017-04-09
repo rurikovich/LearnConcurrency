@@ -9,6 +9,19 @@ public class Matrix {
 
     public Matrix(int[][] data) {
         this.data = data;
+        this.reversedData = fillReversedMatrixData();
+    }
+
+    public Matrix(int n, int m) {
+        data = new int[n][m];
+    }
+
+    public int getN() {
+        return data.length;
+    }
+
+    public int getM() {
+        return data[0].length;
     }
 
     public int[] getRow(int i) {
@@ -16,13 +29,10 @@ public class Matrix {
     }
 
     public int[] getColumn(int i) {
-        if (reversedData == null) {
-            reversedData = fillReversedMatrixData(data);
-        }
         return reversedData[i];
     }
 
-    public void setGrid(int i, int j, int value) {
+    public synchronized void setGrid(int i, int j, int value) {
         data[i][j] = value;
     }
 
@@ -30,7 +40,17 @@ public class Matrix {
         return data[i][j];
     }
 
-    private int[][] fillReversedMatrixData(int[][] data) {
+    public void printMatrix() {
+        for (int i = 0; i < getN(); i++) {
+            for (int j = 0; j < getM(); j++) {
+                System.out.print(getGrid(i, j) + " ");
+            }
+            System.out.println();
+            System.out.println();
+        }
+    }
+
+    private int[][] fillReversedMatrixData() {
         int n = data[0].length;
         int[][] reversedData = new int[n][n];
         for (int i = 0; i < n; i++) {
